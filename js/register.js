@@ -11,23 +11,25 @@ const sendOtpBtn = document.getElementById("sendOtpBtn");
 sendOtpBtn.addEventListener("click", function () {
   const email = emailInput.value.trim();
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailError = document.getElementById("emailError");
   const otpError = document.getElementById("otpError");
+
 
   otpInput.classList.remove("is-invalid");
   otpError.style.display = "none";
 
   if (!email) {
-    otpInput.classList.add("is-invalid");
-    otpError.innerText = "Chưa nhập email.";
-    otpError.style.display = "block";
-    emailInput.focus();
-    return;
+    emailInput.classList.add("is-invalid");
+  emailError.innerText = "Chưa nhập email.";
+  emailError.style.display = "block";
+  emailInput.focus();
+  return;
   }
 
   if (!emailPattern.test(email)) {
-    otpInput.classList.add("is-invalid");
-    otpError.innerText = "Email không hợp lệ.";
-    otpError.style.display = "block";
+    emailInput.classList.add("is-invalid");
+  emailError.innerText = "Email không hợp lệ.";
+  emailError.style.display = "block";
     emailInput.focus();
     return;
   }
