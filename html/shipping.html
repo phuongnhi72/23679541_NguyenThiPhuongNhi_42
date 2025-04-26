@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đơn hàng</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/jquery-3.7.1.min.js"></script>
+  <style>
+    main {
+      padding: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar navbar-expand-lg navbar-light py-3">
+    <div class="container-fluid px-5">
+      <a class="navbar-brand" href="../index.html">
+        <img alt="logo" src="../img/logo1.png" style="height: 200px;"/>
+        <div class="brand-text">
+          <span class="brand-title">LUNAR</span>
+          <span class="brand-tagline">Soft as moonlight.</span>
+        </div>
+      </a>
+    <button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navigation">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Trang chủ</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="../html/products.html" id="productDropdown" role="button">Sản phẩm</a>
+          <ul aria-labelledby="productDropdown" class="dropdown-menu"><li><a class="dropdown-item" href="products.html?cat=bbnhua">Búp bê nhựa</a></li><li><a class="dropdown-item" href="products.html?cat=bbvai">Búp bê vải</a></li><li><a class="dropdown-item" href="products.html?cat=thubong">Thú bông</a></li></ul>
+          <li class="nav-item">
+            <a class="nav-link" href="../html/about.html">Về chúng tôi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="../html/shipping.html">Đơn hàng</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../html/login.html">Đăng nhập</a>
+          </li>
+        </li>
+      </ul>
+      <a class="btn btn-warning" href="../html/cart.html">Giỏ hàng</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <h2 class="text-center mb-4">🚚 Đơn hàng của bạn</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle text-center">
+        <thead class="table-warning">
+          <tr>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody id="orderList"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="bg-dark py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <h5 class="text-danger">Lunar Shop</h5>
+          <p class="text-info">Thế giới của búp bê và thú bông đáng yêu!</p>
+        </div>
+        <div class="col-md-3">
+          <h5 class="text-danger">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-success" href="../index.html">Home</a></li>
+            <li><a class="text-success" href="../products.html">Products</a></li>
+            <li><a class="text-success" href="../about.html">About</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5 class="text-danger">Our Services</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-primary" href="../shipping.html">Shipping</a></li>
+            <li><a class="text-primary" href="../cart.html">Cart</a></li>
+            <li><a class="text-primary" href="../checkout.html">Checkout</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5>Nhận thông báo về sản phẩm mới</h5>
+          <form id="footerSubscribeForm">
+            <input class="form-control mb-2" id="footerSubscribeEmail" placeholder="Enter your email" required="" type="email"/>
+            <button class="btn btn-warning w-100" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </footer>
+    <div aria-hidden="true" class="modal fade" id="footerThankModal" tabindex="-1">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <h5 class="mb-3">Cảm ơn bạn đã đăng ký!</h5>
+            <p>Khi có sản phẩm mới, chúng tôi sẽ gửi thông báo đến bạn.</p>
+            <button class="btn btn-primary" data-bs-dismiss="modal" type="button">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (localStorage.getItem("userLoggedIn") !== "true") {
+        const modal = document.createElement("div");
+        modal.className = "modal fade";
+        modal.id = "loginRequiredModal";
+        modal.tabIndex = -1;
+        modal.innerHTML = `
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Yêu cầu đăng nhập</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body text-center">
+                <p>Bạn cần đăng nhập để xem đơn hàng.</p>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button id="loginBtn" class="btn btn-primary">Đăng nhập</button>
+                <button id="backBtn" class="btn btn-secondary">Quay lại</button>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+
+        const bsModal = new bootstrap.Modal(document.getElementById("loginRequiredModal"));
+        bsModal.show();
+
+        document.getElementById("loginBtn").addEventListener("click", function () {
+          window.location.href = "login.html";
+        });
+
+        document.getElementById("backBtn").addEventListener("click", function () {
+          window.location.href = "home.html";
+        });
+      }
+    });
+        document.addEventListener("DOMContentLoaded", function () {
+      const navLogin = document.querySelector(".nav-link[href*='login.html']");
+      const storedName = localStorage.getItem("loggedUsername");
+
+      if (localStorage.getItem("userLoggedIn") === "true" && storedName && navLogin) {
+        navLogin.innerText = storedName;
+        navLogin.style.backgroundColor = "#90ee90"; 
+        navLogin.style.color = "black"; 
+
+        navLogin.addEventListener("mouseenter", function () {
+          navLogin.innerText = "Đăng xuất";
+          navLogin.style.cursor = "pointer";
+        });
+
+        navLogin.addEventListener("mouseleave", function () {
+          navLogin.innerText = storedName;
+        });
+
+        navLogin.addEventListener("click", function (e) {
+          e.preventDefault();
+          localStorage.removeItem("userLoggedIn");
+          localStorage.removeItem("loggedUsername");
+          window.location.reload();
+        });
+      }
+    });
+        document.addEventListener("DOMContentLoaded", function () {
+          const invoice = JSON.parse(localStorage.getItem("invoiceData"));
+          const orderList = document.getElementById("orderList");
+
+          if (!invoice || !invoice.cart || invoice.cart.length === 0) {
+            orderList.innerHTML = `<tr><td colspan="4" class="text-danger">Không có đơn hàng nào!</td></tr>`;
+            return;
+          }
+
+          invoice.cart.forEach(item => {
+            const price = typeof item.price === 'number' ? item.price : parseInt(item.price.replace(/\D/g, ""));
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${item.title}</td>
+              <td>${item.quantity}</td>
+              <td>${(price * item.quantity).toLocaleString()}đ</td>
+              <td><span class="badge bg-info text-dark">Đơn hàng đang được chuẩn bị</span></td>
+            `;
+            orderList.appendChild(row);
+          });
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+          const footerForm = document.getElementById("footerSubscribeForm");
+          const footerEmail = document.getElementById("footerSubscribeEmail");
+        
+          footerForm?.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const email = footerEmail.value.trim();
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+            if (re.test(email)) {
+              const modal = new bootstrap.Modal(document.getElementById("footerThankModal"));
+              modal.show();
+              footerForm.reset();
+            } else {
+              footerEmail.classList.add("is-invalid");
+              if (!footerEmail.nextElementSibling || !footerEmail.nextElementSibling.classList.contains("invalid-feedback")) {
+                const error = document.createElement("div");
+                error.className = "invalid-feedback";
+                error.innerText = "Vui lòng nhập email hợp lệ.";
+                footerEmail.parentNode.insertBefore(error, footerEmail.nextSibling);
+              }
+            }
+          });
+        
+          footerEmail?.addEventListener("input", function () {
+            footerEmail.classList.remove("is-invalid");
+            const error = footerEmail.parentNode.querySelector(".invalid-feedback");
+            if (error) error.remove();
+          });
+        });
+  </script>
+</body>
+</html>

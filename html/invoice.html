@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hóa đơn</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet"/>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery-3.7.1.min.js"></script>
+<link href="../css/home.css" rel="stylesheet"/>
+<script src="../js/register.js"></script>
+<script src="../js/invoice.js"></script>
+<style>
+  @media print {
+    header, footer, .btn, .navbar, .btn-secondary {
+      display: none !important;
+    }
+    body {
+      margin: 0;
+    }
+    main {
+      padding: 0 !important;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <header class="navbar navbar-expand-lg navbar-light py-3">
+    <div class="container-fluid px-5">
+      <a class="navbar-brand" href="../index.html">
+        <img alt="logo" src="../img/logo1.png" style="height: 200px;"/>
+        <div class="brand-text">
+          <span class="brand-title">LUNAR</span>
+          <span class="brand-tagline">Soft as moonlight.</span>
+        </div>
+      </a>
+    <button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navigation">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Trang chủ</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="../html/products.html" id="productDropdown" role="button">Sản phẩm</a>
+          <ul aria-labelledby="productDropdown" class="dropdown-menu"><li><a class="dropdown-item" href="products.html?cat=bbnhua">Búp bê nhựa</a></li><li><a class="dropdown-item" href="products.html?cat=bbvai">Búp bê vải</a></li><li><a class="dropdown-item" href="products.html?cat=thubong">Thú bông</a></li></ul>
+          <li class="nav-item">
+            <a class="nav-link" href="../html/about.html">Về chúng tôi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../html/shipping.html">Đơn hàng</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../html/login.html">Đăng nhập</a>
+          </li>
+        </li>
+      </ul>
+      <a class="btn btn-warning" href="../html/cart.html">Giỏ hàng</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="container py-5">
+      <div class="bg-white p-4 rounded shadow">
+        <h2 class="text-center mb-4">🧾 Hóa đơn mua hàng</h2>
+        <div id="invoiceContent"></div>
+        <div class="text-center mt-4">
+          <button class="btn btn-primary" onclick="window.print()">🖨️ In hóa đơn</button>
+          <a href="../index.html" class="btn btn-secondary">Quay về trang chủ</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-dark py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <h5 class="text-danger">Lunar Shop</h5>
+          <p class="text-info">Thế giới của búp bê và thú bông đáng yêu!</p>
+        </div>
+        <div class="col-md-3">
+          <h5 class="text-danger">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-success" href="../index.html">Home</a></li>
+            <li><a class="text-success" href="../products.html">Products</a></li>
+            <li><a class="text-success" href="../about.html">About</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5 class="text-danger">Our Services</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-primary" href="../shipping.html">Shipping</a></li>
+            <li><a class="text-primary" href="../cart.html">Cart</a></li>
+            <li><a class="text-primary" href="../checkout.html">Checkout</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5>Nhận thông báo về sản phẩm mới</h5>
+          <form id="footerSubscribeForm">
+            <input class="form-control mb-2" id="footerSubscribeEmail" placeholder="Enter your email" required="" type="email"/>
+            <button class="btn btn-warning w-100" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div aria-hidden="true" class="modal fade" id="footerThankModal" tabindex="-1">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <h5 class="mb-3">Cảm ơn bạn đã đăng ký!</h5>
+          <p>Khi có sản phẩm mới, chúng tôi sẽ gửi thông báo đến bạn.</p>
+          <button class="btn btn-primary" data-bs-dismiss="modal" type="button">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const invoiceData = JSON.parse(localStorage.getItem("invoiceData"));
+    const invoiceContent = document.getElementById("invoiceContent");
+
+    if (!invoiceData) {
+      invoiceContent.innerHTML = "<p class='text-center text-danger'>Không có dữ liệu hóa đơn!</p>";
+      return;
+    }
+
+    const { name, phone, address, method, bankInfo, cart } = invoiceData;
+    let total = 0;
+
+    let html = `
+      <p><strong>Họ và tên:</strong> ${name}</p>
+      <p><strong>Số điện thoại:</strong> ${phone}</p>
+      <p><strong>Địa chỉ:</strong> ${address}</p>
+      <p><strong>Phương thức thanh toán:</strong> ${method}</p>
+    `;
+
+    if (method === "ATM" && bankInfo) {
+      html += `
+        <p><strong>Tên ngân hàng:</strong> ${bankInfo.name}</p>
+        <p><strong>Số tài khoản:</strong> ${bankInfo.number}</p>
+        <p><strong>Chủ tài khoản:</strong> ${bankInfo.holder}</p>
+      `;
+    }
+
+    html += "<hr/><h5>Chi tiết sản phẩm:</h5><table class='table'><thead><tr><th>Tên sản phẩm</th><th>Số lượng</th><th>Đơn giá</th><th>Thành tiền</th></tr></thead><tbody>";
+
+    cart.forEach(item => {
+      const price = typeof item.price === 'number' ? item.price : parseInt(item.price.replace(/\D/g, ""));
+      const lineTotal = price * item.quantity;
+      total += lineTotal;
+      html += `
+        <tr>
+          <td>${item.title}</td>
+          <td>${item.quantity}</td>
+          <td>${price.toLocaleString()}đ</td>
+          <td>${lineTotal.toLocaleString()}đ</td>
+        </tr>
+      `;
+    });
+
+    html += `</tbody></table><p class='text-end fw-bold'>Tổng cộng: ${total.toLocaleString()}đ</p>`;
+    invoiceContent.innerHTML = html;
+  });
+  document.addEventListener("DOMContentLoaded", function () {
+      const footerForm = document.getElementById("footerSubscribeForm");
+      const footerEmail = document.getElementById("footerSubscribeEmail");
+    
+      footerForm?.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const email = footerEmail.value.trim();
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+        if (re.test(email)) {
+          const modal = new bootstrap.Modal(document.getElementById("footerThankModal"));
+          modal.show();
+          footerForm.reset();
+        } else {
+          footerEmail.classList.add("is-invalid");
+          if (!footerEmail.nextElementSibling || !footerEmail.nextElementSibling.classList.contains("invalid-feedback")) {
+            const error = document.createElement("div");
+            error.className = "invalid-feedback";
+            error.innerText = "Vui lòng nhập email hợp lệ.";
+            footerEmail.parentNode.insertBefore(error, footerEmail.nextSibling);
+          }
+        }
+      });
+    
+      footerEmail?.addEventListener("input", function () {
+        footerEmail.classList.remove("is-invalid");
+        const error = footerEmail.parentNode.querySelector(".invalid-feedback");
+        if (error) error.remove();
+      });
+    });
+</script>
+</body>
+
+</html>

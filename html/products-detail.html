@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chi tiết sản phẩm</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet"/>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery-3.7.1.min.js"></script>
+<link href="../css/home.css" rel="stylesheet"/>
+<script src="../js/cart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+
+  #detail-img {
+    max-width: 450px;
+    max-height: 450px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: block;
+    margin: auto;
+  }
+  #detail-img,
+  #detail-title {
+    margin-top: 50px;
+}
+</style>
+</head>
+<body>
+  <header class="navbar navbar-expand-lg navbar-light py-3">
+    <div class="container-fluid px-5">
+      <a class="navbar-brand" href="../index.html">
+        <img alt="logo" src="../img/logo1.png" style="height: 200px;"/>
+        <div class="brand-text">
+          <span class="brand-title">LUNAR</span>
+          <span class="brand-tagline">Soft as moonlight.</span>
+        </div>
+      </a>
+    <button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navigation">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Trang chủ</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="../html/products.html" id="productDropdown" role="button">Sản phẩm</a>
+          <ul aria-labelledby="productDropdown" class="dropdown-menu"><li><a class="dropdown-item" href="products.html?cat=bbnhua">Búp bê nhựa</a></li><li><a class="dropdown-item" href="products.html?cat=bbvai">Búp bê vải</a></li><li><a class="dropdown-item" href="products.html?cat=thubong">Thú bông</a></li></ul>
+          <li class="nav-item">
+            <a class="nav-link" href="../html/about.html">Về chúng tôi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../html/shipping.html">Đơn hàng</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../html/login.html">Đăng nhập</a>
+          </li>
+        </li>
+      </ul>
+      <a class="btn btn-warning" href="../html/cart.html">Giỏ hàng</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="row align-items-start gx-5">
+      <div class="col-md-5">
+        <img alt="Ảnh sản phẩm" class="img-fluid rounded shadow-sm" id="detail-img" src=""/></div>
+      <div class="col-md-7">
+        <h1 class="fw-bold fs-3 mb-2" id="detail-title"></h1>
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <span class="text-muted" id="detail-rating"></span>
+        </div>
+        <h3 class="text-danger fw-bold fs-2 mb-3" id="detail-price">₫350.000</h3>
+        <p id="detail-description"></p>
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <label class="me-2">Số lượng:</label>
+          <input class="form-control w-auto" min="1" style="width: 80px;" type="number" value="1"/>
+          <span class="text-muted ms-3">Còn hàng</span>
+        </div>
+        <div class="d-flex gap-3">
+          <button class="btn btn-warning px-4" onclick="checkLoginBeforeAddToCartDetail()">🛒 Thêm vào giỏ</button>
+          <button class="btn btn-danger px-4">Mua ngay</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-dark py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <h5 class="text-danger">Lunar Shop</h5>
+          <p class="text-info">Thế giới của búp bê và thú bông đáng yêu!</p>
+        </div>
+        <div class="col-md-3">
+          <h5 class="text-danger">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-success" href="../index.html">Home</a></li>
+            <li><a class="text-success" href="../products.html">Products</a></li>
+            <li><a class="text-success" href="../about.html">About</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5 class="text-danger">Our Services</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-primary" href="../shipping.html">Shipping</a></li>
+            <li><a class="text-primary" href="../cart.html">Cart</a></li>
+            <li><a class="text-primary" href="../checkout.html">Checkout</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5>Nhận thông báo về sản phẩm mới</h5>
+          <form id="footerSubscribeForm">
+            <input class="form-control mb-2" id="footerSubscribeEmail" placeholder="Enter your email" required="" type="email"/>
+            <button class="btn btn-warning w-100" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </footer>
+    <div aria-hidden="true" class="modal fade" id="footerThankModal" tabindex="-1">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <h5 class="mb-3">Cảm ơn bạn đã đăng ký!</h5>
+            <p>Khi có sản phẩm mới, chúng tôi sẽ gửi thông báo đến bạn.</p>
+            <button class="btn btn-primary" data-bs-dismiss="modal" type="button">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const data = JSON.parse(localStorage.getItem("productDetail"));
+        if (data) {
+          document.getElementById("detail-title").textContent = data.title;
+          document.getElementById("detail-price").textContent = data.price;
+          document.getElementById("detail-rating").textContent = data.ratingSold;
+          document.getElementById("detail-img").src = data.img;
+
+          const descriptions = {
+            "Búp bê vải Phainon": '<strong>Giới thiệu:</strong><br/>Một loại búp bê vải cao cấp với thiết kế mang phong cách cổ điển, thích hợp làm quà tặng sinh nhật hoặc trang trí phòng ngủ.<br/><br/><strong>Chất liệu:</strong><br/>Vải bông mềm mại.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Tránh để nơi ẩm, giặt nhẹ bằng tay, không dùng máy giặt.',
+
+            "Búp bê vải Sunday": '<strong>Giới thiệu:</strong><br/>Dựa theo nhân vật Sunday nổi tiếng, thiết kế dễ thương, lý tưởng để làm quà lưu niệm hoặc quà cho người yêu thích anime.<br/><br/><strong>Chất liệu:</strong><br/>Vải nỉ cao cấp.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Giặt tay nhẹ nhàng, không ngâm lâu, phơi trong bóng râm.',
+
+            "Capoo cảm xúc": '<strong>Giới thiệu:</strong><br/>Mô phỏng nhân vật Capoo với nhiều biểu cảm dễ thương, phù hợp để trang trí bàn học hoặc làm quà tặng vui nhộn.<br/><br/><strong>Chất liệu:</strong><br/>Vải nỉ và bông.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau khô bằng khăn ẩm, không giặt bằng máy.',
+
+            "Capoo bản thường": '<strong>Giới thiệu:</strong><br/>Thiết kế đơn giản với màu xanh đặc trưng, phù hợp cho trẻ nhỏ ôm ngủ hoặc mang theo đi chơi.<br/><br/><strong>Chất liệu:</strong><br/>Polyester và sợi tổng hợp.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Vệ sinh bằng khăn ướt, để nơi khô ráo.',
+
+            "Capypara đội rùa": '<strong>Giới thiệu:</strong><br/>Phiên bản dễ thương với hình capybara đội nón rùa, là món quà độc đáo cho các bé hoặc fan động vật.<br/><br/><strong>Chất liệu:</strong><br/>Vải nhung & gòn mềm.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Có thể giặt tay, tránh vò mạnh hoặc phơi dưới nắng gắt.',
+
+            "Capypara trái dâu": '<strong>Giới thiệu:</strong><br/>Capybara ôm trái dâu ngọt ngào, cực kỳ thích hợp làm quà valentine hoặc quà cho bé gái nhỏ.<br/><br/><strong>Chất liệu:</strong><br/>Vải lông mịn.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau sạch bằng khăn khô, không nên để gần nguồn nhiệt.',
+
+            "Cinnamoroll tai thỏ": '<strong>Giới thiệu:</strong><br/>Nhân vật nổi tiếng của Sanrio với tai dài đặc trưng, lý tưởng để sưu tầm hoặc làm quà cho bạn gái.<br/><br/><strong>Chất liệu:</strong><br/>Vải nhung mịn.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Giặt tay bằng nước mát, tránh ánh nắng trực tiếp.',
+
+            "Cinnamoroll kẹp tóc": '<strong>Giới thiệu:</strong><br/>Bản mini đáng yêu, có thể dùng làm vật trang trí balo hoặc gối ôm nhỏ, rất hợp để tặng bạn bè.<br/><br/><strong>Chất liệu:</strong><br/>Vải nhung.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Dùng khăn ẩm lau nhẹ, không dùng hóa chất tẩy rửa.',
+
+            "Cún lông xám":' <strong>Giới thiệu:</strong><br/>Chú cún bông màu xám với bộ lông mượt mà, thích hợp để ôm khi ngủ hoặc làm bạn đồng hành cho trẻ nhỏ.<br/><br/><strong>Chất liệu:</strong><br/>Lông nhung tổng hợp.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau bề mặt thường xuyên, không giặt bằng máy.',
+
+            "Cún trà sữa": '<strong>Giới thiệu:</strong><br/>Thiết kế độc đáo với hình dáng cún nằm trên ly trà sữa, là món quà ngộ nghĩnh cho người yêu thích đồ ăn uống.<br/><br/><strong>Chất liệu:</strong><br/>Nhung mịn và polyester.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau bằng khăn mềm, không ngâm nước.',
+
+            "Búp bê nhựa Mỹ ver1": '<strong>Giới thiệu:</strong><br/>Búp bê thời trang kiểu Mỹ, phù hợp cho trẻ em chơi hoặc sưu tập.<br/><br/><strong>Chất liệu:</strong><br/>Nhựa ABS cao cấp.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau bằng khăn khô, tránh va đập mạnh.',
+
+            "Búp bê nhựa Mỹ ver2": '<strong>Giới thiệu:</strong><br/>Thiết kế hiện đại, phù hợp với trẻ nhỏ hoặc người sưu tập búp bê.<br/><br/><strong>Chất liệu:</strong><br/>Nhựa + vải.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Tránh tiếp xúc với hóa chất, không rửa bằng nước.',
+
+            "Cáo mini": '<strong>Giới thiệu:</strong><br/>Cáo nhỏ gọn, dáng ngồi, dễ thương, rất thích hợp để trang trí góc học tập hoặc bàn làm việc.<br/><br/><strong>Chất liệu:</strong><br/>Vải bông & nhung.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau nhẹ bằng vải khô, không để dính nước.',
+
+            "Cáo khổng lồ": '<strong>Giới thiệu:</strong><br/>Cáo cỡ lớn với màu cam nổi bật, ôm cực sướng, thích hợp làm gối ôm trong phòng ngủ.<br/><br/><strong>Chất liệu:</strong><br/>Vải nhung cao cấp.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Tránh để nước thấm vào lõi bông, vệ sinh định kỳ.',
+
+            "Búp bê vải girl": '<strong>Giới thiệu:</strong><br/>Thiết kế nữ tính, nhỏ nhắn, là món quà lý tưởng cho các bé gái trong dịp sinh nhật.<br/><br/><strong>Chất liệu:</strong><br/>Vải cotton.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Không nên giặt máy, giặt tay bằng xà phòng nhẹ.',
+
+            "Búp bê vải boy": '<strong>Giới thiệu:</strong><br/>Búp bê dáng nam đơn giản, phù hợp làm cặp với búp bê girl trong quà tặng đôi.<br/><br/><strong>Chất liệu:</strong><br/>Vải bông và polyester.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Không ngâm lâu, để khô tự nhiên.',
+
+            "Búp bê nhựa Rose": '<strong>Giới thiệu:</strong><br/>Thiết kế kiêu sa như công chúa, thích hợp tặng vào dịp lễ tốt nghiệp hoặc sinh nhật bé gái.<br/><br/><strong>Chất liệu:</strong><br/>Nhựa dẻo kết hợp vải.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau bằng khăn khô, không ngâm nước.',
+
+            "Búp bê nhựa Aqua": '<strong>Giới thiệu:</strong><br/>Tông màu xanh biển, phong cách hiện đại, phù hợp với các bạn nữ tuổi teen.<br/><br/><strong>Chất liệu:</strong><br/>Nhựa PVC + vải.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Không dùng nước rửa, bảo quản trong hộp kín.',
+
+            "Kuromi tím mộng mơ": '<strong>Giới thiệu:</strong><br/>Nhân vật đáng yêu thuộc Sanrio, phù hợp làm quà sinh nhật cho bạn gái thích phong cách cute.<br/><br/><strong>Chất liệu:</strong><br/>Bông và nhung mềm.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Giặt tay, tránh để vật nặng đè lên lâu ngày.',
+
+            "Kuromi đen huyền bí": '<strong>Giới thiệu:</strong><br/>Phiên bản cá tính hơn của Kuromi, hợp với những bạn nữ cá tính hoặc fan anime.<br/><br/><strong>Chất liệu:</strong><br/>Vải nhung mịn.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau bằng vải khô, tránh để trong môi trường bụi bẩn.',
+
+            "Búp bê nhựa Lisa Gem": '<strong>Giới thiệu:</strong><br/>Búp bê thời trang hiện đại, ánh kim, hợp làm quà tặng trong dịp Giáng sinh.<br/><br/><strong>Chất liệu:</strong><br/>Nhựa cao cấp + vải.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau sạch định kỳ, tránh va đập mạnh.',
+
+            "Búp bê nhựa Lisa Pinky": '<strong>Giới thiệu:</strong><br/>Phong cách pastel nhẹ nhàng, phù hợp tặng sinh nhật cho bé gái nhỏ tuổi.<br/><br/><strong>Chất liệu:</strong><br/>Nhựa ABS & vải lụa.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Không để gần nguồn nhiệt, lau khô thường xuyên.',
+
+            "My Melody kẹp nơ": '<strong>Giới thiệu:</strong><br/>My Melody mini, có thể treo túi xách hoặc móc khóa, làm quà xinh xắn cho bạn thân.<br/><br/><strong>Chất liệu:</strong><br/>Vải nỉ cao cấp.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau khô thường xuyên, tránh dính bẩn.',
+
+            "My Melody gấu nhỏ": '<strong>Giới thiệu:</strong><br/>Phiên bản ôm gấu bông, cực dễ thương, lý tưởng cho các dịp kỷ niệm.<br/><br/><strong>Chất liệu:</strong><br/>Nhung & bông.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Không nên vắt, để khô tự nhiên.',
+
+            "Mèo nâu": '<strong>Giới thiệu:</strong><br/>Mèo bông mềm màu nâu, dáng ngồi, thích hợp làm bạn ngủ cho trẻ nhỏ.<br/><br/><strong>Chất liệu:</strong><br/>Polyester & bông mềm.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Tránh ánh sáng trực tiếp, vệ sinh bằng khăn ẩm.',
+
+            "Mèo gấu trúc": '<strong>Giới thiệu:</strong><br/>Mèo phối màu gấu trúc đen trắng độc đáo, hợp làm quà độc lạ cho bạn bè.<br/><br/><strong>Chất liệu:</strong><br/>Nhung tổng hợp.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau khô bằng khăn sạch, không phơi dưới nắng mạnh.',
+
+            "Pikachu": '<strong>Giới thiệu:</strong><br/>Phiên bản thú bông của nhân vật Pikachu nổi tiếng, món quà tuyệt vời cho fan Pokémon.<br/><br/><strong>Chất liệu:</strong><br/>Bông gòn & vải polyester.<br/><br/><strong>Hướng dẫn bảo quản:</strong><br/>Lau sạch định kỳ, tránh để nơi ẩm thấp.',
+
+          };
+          const desc = descriptions[data.title] || descriptions["default"];
+          document.getElementById("detail-description").innerHTML = desc;
+        }
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const footerForm = document.getElementById("footerSubscribeForm");
+        const footerEmail = document.getElementById("footerSubscribeEmail");
+
+        if (footerForm && footerEmail) {
+          footerForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const email = footerEmail.value.trim();
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (re.test(email)) {
+              const modal = document.createElement("div");
+              modal.className = "modal fade";
+              modal.id = "footerThankModal";
+              modal.tabIndex = -1;
+              modal.innerHTML = `
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-body text-center">
+                      <h5 class="mb-3">Cảm ơn bạn đã đăng ký!</h5>
+                      <p>Khi có sản phẩm mới, chúng tôi sẽ gửi thông báo đến bạn.</p>
+                      <button class="btn btn-primary" data-bs-dismiss="modal" type="button">Đóng</button>
+                    </div>
+                  </div>
+                </div>`;
+              document.body.appendChild(modal);
+              new bootstrap.Modal(modal).show();
+              footerForm.reset();
+            } else {
+              footerEmail.classList.add("is-invalid");
+              if (!footerEmail.nextElementSibling || !footerEmail.nextElementSibling.classList.contains("invalid-feedback")) {
+                const error = document.createElement("div");
+                error.className = "invalid-feedback";
+                error.innerText = "Vui lòng nhập email hợp lệ.";
+                footerEmail.parentNode.insertBefore(error, footerEmail.nextSibling);
+              }
+            }
+          });
+
+          footerEmail.addEventListener("input", function () {
+            footerEmail.classList.remove("is-invalid");
+            const error = footerEmail.parentNode.querySelector(".invalid-feedback");
+            if (error) error.remove();
+          });
+        }
+      });
+      function checkLoginBeforeAddToCartDetail() {
+        const isLoggedIn = localStorage.getItem("userLoggedIn");
+        if (!isLoggedIn) {
+          const modal = document.createElement("div");
+          modal.className = "modal fade";
+          modal.tabIndex = -1;
+          modal.innerHTML = `
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-body text-center p-4">
+                  <h5 class="mb-3">Bạn cần đăng nhập để thêm vào giỏ hàng!</h5>
+                  <a href="login.html" class="btn btn-primary">Đăng nhập</a>
+                </div>
+              </div>
+            </div>`;
+          document.body.appendChild(modal);
+          const bsModal = new bootstrap.Modal(modal);
+          bsModal.show();
+        } else {
+          const data = JSON.parse(localStorage.getItem("productDetail"));
+          const quantityInput = document.querySelector("input[type='number']");
+          const quantity = parseInt(quantityInput.value);
+
+          if (data && quantity > 0) {
+            for (let i = 0; i < quantity; i++) {
+              addToCart({
+                title: data.title,
+                price: data.price
+              });
+            }
+            alert(`✅ Đã thêm ${quantity} sản phẩm vào giỏ hàng!`);
+          }
+        }
+      }
+
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const navLogin = document.querySelector(".nav-link[href*='login.html']");
+        const storedName = localStorage.getItem("loggedUsername");
+
+        if (localStorage.getItem("userLoggedIn") === "true" && storedName && navLogin) {
+          navLogin.innerText = storedName;
+          navLogin.style.backgroundColor = "#90ee90"; 
+          navLogin.style.color = "black"; 
+
+          navLogin.addEventListener("mouseenter", function () {
+            navLogin.innerText = "Đăng xuất";
+            navLogin.style.cursor = "pointer";
+          });
+
+          navLogin.addEventListener("mouseleave", function () {
+            navLogin.innerText = storedName;
+          });
+
+          navLogin.addEventListener("click", function (e) {
+            e.preventDefault();
+            localStorage.removeItem("userLoggedIn");
+            localStorage.removeItem("loggedUsername");
+            window.location.reload();
+          });
+        }
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const btnBuyNow = document.querySelector(".btn-danger.px-4");
+        const qtyInput = document.querySelector("input[type='number']");
+
+        btnBuyNow.addEventListener("click", function () {
+          const isLoggedIn = localStorage.getItem("userLoggedIn");
+          if (!isLoggedIn) {
+            alert("⚠️ Bạn cần đăng nhập trước khi mua hàng.");
+            return window.location.href = "login.html";
+          }
+
+          const quantity = parseInt(qtyInput.value) || 1;
+          const product = JSON.parse(localStorage.getItem("productDetail"));
+
+          if (!product || !product.title || !product.price) {
+            alert("❌ Dữ liệu sản phẩm không hợp lệ!");
+            return;
+          }
+          const price = typeof product.price === "number" 
+        ? product.price 
+        : parseInt((product.price + "").replace(/[^\d]/g, ""));
+
+          const cartItem = {
+            title: product.title,
+            price: price,
+            img: product.img || "",
+            quantity: quantity
+          };
+
+          localStorage.setItem("cartItems", JSON.stringify([cartItem]));
+          localStorage.setItem("autoBuyNow", "true");
+          window.location.href = "checkout.html";
+        });
+      });
+      </script>
+
+</body>
+</html>

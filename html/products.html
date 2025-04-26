@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Danh mục sản phẩm</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet"/>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery-3.7.1.min.js"></script>
+<link href="../css/home.css" rel="stylesheet"/>
+<script src="../js/products.js"></script>
+<script src="../js/cart.js"></script>
+<style>
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  .row.row-cols-1.row-cols-md-3.g-4 > .col {
+    display: flex;
+  }
+
+  .card.h-100 {
+    flex: 1 1 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .product-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: flex-start;
+  }
+
+  .product-row > .col {
+    flex: 0 0 calc(33.333% - 16px);
+    max-width: calc(33.333% - 16px);
+  }
+
+  @media (max-width: 768px) {
+    .product-row > .col {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  .product-title-highlight {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #222;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+</style>
+</head>
+<body>
+  <header class="navbar navbar-expand-lg navbar-light py-3">
+    <div class="container-fluid px-5">
+      <a class="navbar-brand" href="../index.html">
+        <img alt="logo" src="../img/logo1.png" style="height: 200px;"/>
+        <div class="brand-text">
+          <span class="brand-title">LUNAR</span>
+          <span class="brand-tagline">Soft as moonlight.</span>
+        </div>
+      </a>
+    <button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navigation">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Trang chủ</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="../html/products.html" id="productDropdown" role="button">Sản phẩm</a>
+          <ul aria-labelledby="productDropdown" class="dropdown-menu"><li><a class="dropdown-item" href="products.html?cat=bbnhua">Búp bê nhựa</a></li><li><a class="dropdown-item" href="products.html?cat=bbvai">Búp bê vải</a></li><li><a class="dropdown-item" href="products.html?cat=thubong">Thú bông</a></li></ul>
+          <li class="nav-item">
+            <a class="nav-link" href="../html/about.html">Về chúng tôi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../html/shipping.html">Đơn hàng</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../html/login.html">Đăng nhập</a>
+          </li>
+        </li>
+      </ul>
+      <a class="btn btn-warning" href="../html/cart.html">Giỏ hàng</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="container py-5">
+      <div class="row">
+        <div class="col-md-3">
+          <h4 class="sidebar-title">🔎 Bộ lọc</h4>
+          <div class="form-check">
+            <input class="form-check-input" id="type1" type="checkbox"/>
+            <label class="form-check-label" for="type1">Búp bê nhựa</label>🪆
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" id="type2" type="checkbox"/>
+            <label class="form-check-label" for="type2">Búp bê vải</label>🧵
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" id="type3" type="checkbox"/>
+            <label class="form-check-label" for="type3">Thú bông</label>🧸
+          </div>
+          <hr/>
+          <h5 class="sidebar-title">💵 Khoảng giá</h5>
+          <div class="form-check">
+            <input class="form-check-input" id="price1" type="checkbox"/>
+            <label class="form-check-label" for="price1">Dưới 100.000đ</label>💰
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" id="price2" type="checkbox"/>
+            <label class="form-check-label" for="price2">100.000đ - 300.000đ</label>💰
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" id="price3" type="checkbox"/>
+            <label class="form-check-label" for="price3">Trên 300.000đ</label>💰
+          </div>
+        </div>
+        <div class="col-md-9"><h2 class="product-title-highlight">Tất cả sản phẩm</h2>
+          <div class="product-group">
+            <div class="product-row d-flex flex-wrap gap-4 justify-content-start">
+          <div class="col">
+            <div class="card h-100">
+              <img alt="doll1" class="card-img-top" src="../img/doll1.png"/>
+              <div class="card-body">
+                <h5 class="card-title">Búp bê vải Phainon</h5><p class="text-muted mb-1">⭐ 5.0 | Đã bán: 7.2k</p>
+                <p class="card-text">Giá: 350.000đ</p>
+                <div class="d-flex gap-2 mt-2">
+                  <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Búp bê vải Phainon`, 'price': `Giá: 350.000đ`, 'ratingSold': '⭐ 5.0 | Đã bán: 7.2k', 'img': `../img/doll1.png`}));">Xem chi tiết</a>
+                  <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Búp bê vải Phainon`, price: `Giá: 350.000đ`, img: `../img/doll1.png`})">🛒 Thêm vào giỏ</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <img alt="cinna1" class="card-img-top" src="../img/doll2.png"/>
+              <div class="card-body">
+                <h5 class="card-title">Búp bê vải Sunday</h5><p class="text-muted mb-1">⭐ 4.9 | Đã bán: 4k</p>
+                <p class="card-text">Giá: 320.000đ</p>
+                <div class="d-flex gap-2 mt-2">
+                  <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Búp bê vải Sunday`, 'price': `Giá: 320.000đ`, 'ratingSold': '⭐ 4.9 | Đã bán: 4k', 'img': `../img/doll2.png`}));">Xem chi tiết</a>
+                  <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Búp bê vải Sunday`, price: `Giá: 320.000đ`, img: `../img/doll2.png`})">🛒 Thêm vào giỏ</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <img alt="cinna1" class="card-img-top" src="../img/capoo1.jpg"/>
+              <div class="card-body">
+                <h5 class="card-title">Capoo cảm xúc</h5><p class="text-muted mb-1">⭐ 4.0 | Đã bán: 5k</p>
+                <p class="card-text">Giá: 120.000đ</p>
+                <div class="d-flex gap-2 mt-2">
+                  <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Capoo cảm xúc`, 'price': `Giá: 120.000đ`, 'ratingSold': '⭐ 4.0 | Đã bán: 5k', 'img': `../img/capoo1.jpg`}));">Xem chi tiết</a>
+                  <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Capoo cảm xúc`, price: `Giá: 120.000đ`, img: `../img/capoo1.jpg`})">🛒 Thêm vào giỏ</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-group"><div class="product-row d-flex flex-wrap gap-4 justify-content-start">
+        <div class="col">
+          <div class="card h-100">
+            <img alt="bupbe1" class="card-img-top" src="../img/capoo2.jpg"/>
+            <div class="card-body">
+              <h5 class="card-title">Capoo bản thường</h5><p class="text-muted mb-1">⭐ 4.0 | Đã bán: 2.2k</p>
+              <p class="card-text">Giá: 80.000đ</p>
+              <div class="d-flex gap-2 mt-2">
+                <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Capoo bản thường`, 'price': `Giá: 80.000đ`, 'ratingSold': '⭐ 4.0 | Đã bán: 2.2k', 'img': `../img/capoo2.jpg`}));">Xem chi tiết</a>
+                <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Capoo bản thường`, price: `Giá: 80.000đ`, img: `../img/capoo2.jpg`})">🛒 Thêm vào giỏ</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img alt="doll1" class="card-img-top" src="../img/capy1.jpg"/>
+            <div class="card-body">
+              <h5 class="card-title">Capypara đội rùa</h5><p class="text-muted mb-1">⭐ 3.9 | Đã bán: 1.5k</p>
+              <p class="card-text">Giá: 100.000đ</p>
+              <div class="d-flex gap-2 mt-2">
+                <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Capypara đội rùa`, 'price': `Giá: 100.000đ`, 'ratingSold': '⭐ 3.9 | Đã bán: 1.5k', 'img': `../img/capy1.jpg`}));">Xem chi tiết</a>
+                <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Capypara đội rùa`, price: `Giá: 100.000đ`, img: `../img/capy1.jpg`})">🛒 Thêm vào giỏ</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img alt="cinna1" class="card-img-top" src="../img/capy2.jpg"/>
+            <div class="card-body">
+              <h5 class="card-title">Capypara trái dâu</h5><p class="text-muted mb-1">⭐ 4.2 | Đã bán: 3.3k</p>
+              <p class="card-text">Giá: 140.000đ</p>
+              <div class="d-flex gap-2 mt-2">
+                <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Capypara trái dâu`, 'price': `Giá: 140.000đ`, 'ratingSold': '⭐ 4.2 | Đã bán: 3.3k', 'img': `../img/capy2.jpg`}));">Xem chi tiết</a>
+                <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Capypara trái dâu`, price: `Giá: 140.000đ`, img: `../img/capy2.jpg`})">🛒 Thêm vào giỏ</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product-group"><div class="product-row d-flex flex-wrap gap-4 justify-content-start">
+      <div class="col">
+        <div class="card h-100">
+          <img alt="bupbe1" class="card-img-top" src="../img/cinna1.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Cinnamoroll tai thỏ</h5><p class="text-muted mb-1">⭐ 4.5 | Đã bán: 2.3k</p>
+            <p class="card-text">Giá: 150.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Cinnamoroll tai thỏ`, 'price': `Giá: 150.000đ`, 'ratingSold': '⭐ 4.5 | Đã bán: 2.3k', 'img': `../img/cinna1.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Cinnamoroll tai thỏ`, price: `Giá: 150.000đ`, img: `../img/cinna1.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="doll1" class="card-img-top" src="../img/cinna2.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Cinnamoroll kẹp tóc</h5><p class="text-muted mb-1">⭐ 4.0 | Đã bán: 1.5k</p>
+            <p class="card-text">Giá: 170.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Cinnamoroll kẹp tóc`, 'price': `Giá: 170.000đ`, 'ratingSold': '⭐ 4.0 | Đã bán: 1.5k', 'img': `../img/cinna2.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Cinnamoroll kẹp tóc`, price: `Giá: 170.000đ`, img: `../img/cinna2.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="cinna1" class="card-img-top" src="../img/dog1.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Cún lông xám</h5><p class="text-muted mb-1">⭐ 4.3 | Đã bán: 2.2k</p>
+            <p class="card-text">Giá: 100.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Cún lông xám`, 'price': `Giá: 100.000đ`, 'ratingSold': '⭐ 4.3 | Đã bán: 2.2k', 'img': `../img/dog1.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Cún lông xám`, price: `Giá: 100.000đ`, img: `../img/dog1.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product-group">
+    <div class="product-row d-flex flex-wrap gap-4 justify-content-start">
+      <div class="col">
+        <div class="card h-100">
+          <img alt="bupbe1" class="card-img-top" src="../img/dog2.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Cún trà sữa</h5><p class="text-muted mb-1">⭐ 4.7 | Đã bán: 1.4k</p>
+            <p class="card-text">Giá: 200.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Cún trà sữa`, 'price': `Giá: 200.000đ`, 'ratingSold': '⭐ 4.7 | Đã bán: 1.4k', 'img': `../img/dog2.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Cún trà sữa`, price: `Giá: 200.000đ`, img: `../img/dog2.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="bupbe1" class="card-img-top" src="../img/bupbe1.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Búp bê nhựa Mỹ ver1</h5><p class="text-muted mb-1">⭐ 4.3 | Đã bán: 2.1k</p>
+            <p class="card-text">Giá: 200.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Búp bê nhựa Mỹ ver1`, 'price': `Giá: 200.000đ`, 'ratingSold': '⭐ 4.3 | Đã bán: 2.1k', 'img': `../img/bupbe1.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Búp bê nhựa Mỹ ver1`, price: `Giá: 200.000đ`, img: `../img/bupbe1.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="doll1" class="card-img-top" src="../img/bupbe2.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Búp bê nhựa Mỹ ver2</h5><p class="text-muted mb-1">⭐ 4.5 | Đã bán: 3.4k</p>
+            <p class="card-text">Giá: 220.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Búp bê nhựa Mỹ ver2`, 'price': `Giá: 220.000đ`, 'ratingSold': '⭐ 4.5 | Đã bán: 3.4k', 'img': `../img/bupbe2.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Búp bê nhựa Mỹ ver2`, price: `Giá: 220.000đ`, img: `../img/bupbe2.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product-group">
+    <div class="product-row d-flex flex-wrap gap-4 justify-content-start">
+      <div class="col">
+        <div class="card h-100">
+          <img alt="bupbe1" class="card-img-top" src="../img/fox1.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Cáo mini</h5><p class="text-muted mb-1">⭐ 3.5 | Đã bán: 2.1k</p>
+            <p class="card-text">Giá: 100.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Cáo mini`, 'price': `Giá: 100.000đ`, 'ratingSold': '⭐ 3.5 | Đã bán: 2.1k', 'img': `../img/fox1.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Cáo mini`, price: `Giá: 100.000đ`, img: `../img/fox1.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="doll1" class="card-img-top" src="../img/fox2.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Cáo khổng lồ</h5><p class="text-muted mb-1">⭐ 3.9 | Đã bán: 1.7k</p>
+            <p class="card-text">Giá: 400.000</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Cáo khổng lồ`, 'price': `Giá: 400.000`, 'ratingSold': '⭐ 3.9 | Đã bán: 1.7k', 'img': `../img/fox2.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Cáo khổng lồ`, price: `Giá: 400.000`, img: `../img/fox2.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="cinna1" class="card-img-top" src="../img/han1.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Búp bê vải girl</h5><p class="text-muted mb-1">⭐ 3.2 | Đã bán: 1.2k</p>
+            <p class="card-text">Giá: 120.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Búp bê vải girl`, 'price': `Giá: 120.000đ`, 'ratingSold': '⭐ 3.2 | Đã bán: 1.2k', 'img': `../img/han1.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Búp bê vải girl`, price: `Giá: 120.000đ`, img: `../img/han1.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product-group">
+    <div class="product-row d-flex flex-wrap gap-4 justify-content-start">
+      <div class="col">
+        <div class="card h-100">
+          <img alt="bupbe1" class="card-img-top" src="../img/han2.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Búp bê vải boy</h5><p class="text-muted mb-1">⭐ 3.9 | Đã bán: 2.5k</p>
+            <p class="card-text">Giá: 150.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Búp bê vải boy`, 'price': `Giá: 150.000đ`, 'ratingSold': '⭐ 3.9 | Đã bán: 2.5k', 'img': `../img/han2.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Búp bê vải boy`, price: `Giá: 150.000đ`, img: `../img/han2.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="doll1" class="card-img-top" src="../img/japan1.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Búp bê nhựa Rose</h5><p class="text-muted mb-1">⭐ 4.1 | Đã bán: 3.8k</p>
+            <p class="card-text">Giá: 299.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Búp bê nhựa Rose`, 'price': `Giá: 299.000đ`, 'ratingSold': '⭐ 4.1 | Đã bán: 3.8k', 'img': `../img/japan1.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Búp bê nhựa Rose`, price: `Giá: 299.000đ`, img: `../img/japan1.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="cinna1" class="card-img-top" src="../img/japan2.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Búp bê nhựa Aqua</h5><p class="text-muted mb-1">⭐ 4.3 | Đã bán: 4.5k</p>
+            <p class="card-text">Giá: 299.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Búp bê nhựa Aqua`, 'price': `Giá: 299.000đ`, 'ratingSold': '⭐ 4.3 | Đã bán: 4.5k', 'img': `../img/japan2.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Búp bê nhựa Aqua`, price: `Giá: 299.000đ`, img: `../img/japan2.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product-group">
+    <div class="product-row d-flex flex-wrap gap-4 justify-content-start">
+      <div class="col">
+        <div class="card h-100">
+          <img alt="bupbe1" class="card-img-top" src="../img/kuro1.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Kuromi tím mộng mơ</h5><p class="text-muted mb-1">⭐ 4.2| Đã bán: 2.1k</p>
+            <p class="card-text">Giá: 160.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Kuromi tím mộng mơ`, 'price': `Giá: 160.000đ`, 'ratingSold': '⭐ 4.2| Đã bán: 2.1k', 'img': `../img/kuro1.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Kuromi tím mộng mơ`, price: `Giá: 160.000đ`, img: `../img/kuro1.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="doll1" class="card-img-top" src="../img/kuro2.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Kuromi đen huyền bí</h5><p class="text-muted mb-1">⭐ 4.3 | Đã bán: 3.4k</p>
+            <p class="card-text">Giá: 170.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Kuromi đen huyền bí`, 'price': `Giá: 170.000đ`, 'ratingSold': '⭐ 4.3 | Đã bán: 3.4k', 'img': `../img/kuro2.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Kuromi đen huyền bí`, price: `Giá: 170.000đ`, img: `../img/kuro2.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="cinna1" class="card-img-top" src="../img/lisa1.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Búp bê nhựa Lisa Gem</h5><p class="text-muted mb-1">⭐ 3.5 | Đã bán: 2.4k</p>
+            <p class="card-text">Giá: 310.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Búp bê nhựa Lisa Gem`, 'price': `Giá: 310.000đ`, 'ratingSold': '⭐ 3.5 | Đã bán: 2.4k', 'img': `../img/lisa1.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Búp bê nhựa Lisa Gem`, price: `Giá: 310.000đ`, img: `../img/lisa1.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product-group">
+    <div class="product-row d-flex flex-wrap gap-4 justify-content-start">
+      <div class="col">
+        <div class="card h-100">
+          <img alt="bupbe1" class="card-img-top" src="../img/lisa2.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Búp bê nhựa Lisa Pinky</h5><p class="text-muted mb-1">⭐ 3.7 | Đã bán: 1.1k</p>
+            <p class="card-text">Giá: 310.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Búp bê nhựa Lisa Pinky`, 'price': `Giá: 310.000đ`, 'ratingSold': '⭐ 3.7 | Đã bán: 1.1k', 'img': `../img/lisa2.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Búp bê nhựa Lisa Pinky`, price: `Giá: 310.000đ`, img: `../img/lisa2.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="doll1" class="card-img-top" src="../img/melody1.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">My Melody kẹp nơ</h5><p class="text-muted mb-1">⭐ 4.0 | Đã bán: 1.3k</p>
+            <p class="card-text">Giá: 140.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `My Melody kẹp nơ`, 'price': `Giá: 140.000đ`, 'ratingSold': '⭐ 4.0 | Đã bán: 1.3k', 'img': `../img/melody1.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `My Melody kẹp nơ`, price: `Giá: 140.000đ`, img: `../img/melody1.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="cinna1" class="card-img-top" src="../img/melody2.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">My Melody gấu nhỏ</h5><p class="text-muted mb-1">⭐ 4.2 | Đã bán: 1.8k</p>
+            <p class="card-text">Giá: 160.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `My Melody gấu nhỏ`, 'price': `Giá: 160.000đ`, 'ratingSold': '⭐ 4.2 | Đã bán: 1.8k', 'img': `../img/melody2.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `My Melody gấu nhỏ`, price: `Giá: 160.000đ`, img: `../img/melody2.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product-group">
+    <div class="product-row d-flex flex-wrap gap-4 justify-content-start">
+      <div class="col">
+        <div class="card h-100">
+          <img alt="bupbe1" class="card-img-top" src="../img/meobeo1.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Mèo nâu</h5><p class="text-muted mb-1">⭐ 4.7 | Đã bán: 3.2k</p>
+            <p class="card-text">Giá: 99.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Mèo nâu`, 'price': `Giá: 99.000đ`, 'ratingSold': '⭐ 4.7 | Đã bán: 3.2k', 'img': `../img/meobeo1.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Mèo nâu`, price: `Giá: 99.000đ`, img: `../img/meobeo1.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="doll1" class="card-img-top" src="../img/meobeo2.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Mèo gấu trúc</h5><p class="text-muted mb-1">⭐ 4.1 | Đã bán: 4.5k</p>
+            <p class="card-text">Giá: 179.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Mèo gấu trúc`, 'price': `Giá: 179.000đ`, 'ratingSold': '⭐ 4.1 | Đã bán: 4.5k', 'img': `../img/meobeo2.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Mèo gấu trúc`, price: `Giá: 179.000đ`, img: `../img/meobeo2.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img alt="cinna1" class="card-img-top" src="../img/poke1.jpg"/>
+          <div class="card-body">
+            <h5 class="card-title">Pikachu</h5><p class="text-muted mb-1">⭐ 3.8 | Đã bán: 2.1k</p>
+            <p class="card-text">Giá: 50.000đ</p>
+            <div class="d-flex gap-2 mt-2">
+              <a class="btn-outline-primary btn btn-md" href="products-detail.html" onclick="localStorage.setItem('productDetail', JSON.stringify({'title': `Pikachu`, 'price': `Giá: 50.000đ`, 'ratingSold': '⭐ 3.8 | Đã bán: 2.1k', 'img': `../img/poke1.jpg`}));">Xem chi tiết</a>
+              <button class="btn-warning ms-2 btn btn-md" onclick="checkLoginBeforeAddToCart({title: `Pikachu`, price: `Giá: 50.000đ`, img: `../img/poke1.jpg`})">🛒 Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-dark py-5">
+  <div class="container">
+  <div class="row">
+  <div class="col-md-3">
+  <h5 class="text-danger">
+         Lunar Shop
+        </h5>
+  <p class="text-info">
+         Thế giới của búp bê và thú bông đáng yêu!
+        </p>
+  </div>
+  <div class="col-md-3">
+  <h5 class="text-danger">
+         Quick Links
+        </h5>
+  <ul class="list-unstyled">
+  <li>
+  <a class="text-success" href="../index.html">
+           Home
+          </a>
+  </li>
+  <li>
+  <a class="text-success" href="../products.html">
+           Products
+          </a>
+  </li>
+  <li>
+  <a class="text-success" href="../about.html">
+           About
+          </a>
+  </li>
+  </ul>
+  </div>
+  <div class="col-md-3">
+  <h5 class="text-danger">
+         Our Services
+        </h5>
+  <ul class="list-unstyled">
+  <li>
+  <a class="text-primary" href="../shipping.html">
+           Shipping
+          </a>
+  </li>
+  <li>
+  <a class="text-primary" href="../cart.html">
+           Cart
+          </a>
+  </li>
+  <li>
+  <a class="text-primary" href="../checkout.html">
+           Checkout
+          </a>
+  </li>
+  </ul>
+  </div>
+  <div class="col-md-3">
+  <h5>
+         Nhận thông báo về sản phẩm mới
+        </h5>
+  <form id="footerSubscribeForm">
+  <input class="form-control mb-2" id="footerSubscribeEmail" placeholder="Enter your email" required="" type="email"/>
+  <button class="btn btn-warning w-100" type="submit">
+          Submit
+         </button>
+  </form>
+  </div>
+  </div>
+  </div>
+  </footer>
+  <div aria-hidden="true" class="modal fade" id="footerThankModal" tabindex="-1">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+  <div class="modal-content">
+  <div class="modal-body text-center">
+  <h5 class="mb-3">
+         Cảm ơn bạn đã đăng ký!
+        </h5>
+  <p>
+         Khi có sản phẩm mới, chúng tôi sẽ gửi thông báo đến bạn.
+        </p>
+  <button class="btn btn-primary" data-bs-dismiss="modal" type="button">
+         Đóng
+        </button>
+  </div>
+  </div>
+  </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const footerForm = document.getElementById("footerSubscribeForm");
+      const footerEmail = document.getElementById("footerSubscribeEmail");
+    
+      footerForm?.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const email = footerEmail.value.trim();
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+        if (re.test(email)) {
+          const modal = new bootstrap.Modal(document.getElementById("footerThankModal"));
+          modal.show();
+          footerForm.reset();
+        } else {
+          footerEmail.classList.add("is-invalid");
+          if (!footerEmail.nextElementSibling || !footerEmail.nextElementSibling.classList.contains("invalid-feedback")) {
+            const error = document.createElement("div");
+            error.className = "invalid-feedback";
+            error.innerText = "Vui lòng nhập email hợp lệ.";
+            footerEmail.parentNode.insertBefore(error, footerEmail.nextSibling);
+          }
+        }
+      });
+    
+      footerEmail?.addEventListener("input", function () {
+        footerEmail.classList.remove("is-invalid");
+        const error = footerEmail.parentNode.querySelector(".invalid-feedback");
+        if (error) error.remove();
+      });
+    });
+    </script>
+    
+</body>
+
+</html>
