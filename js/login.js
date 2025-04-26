@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
     bsModal.show();
 
     document.getElementById("goHomeBtn").addEventListener("click", function () {
-      window.location.href = "home.html";
+      window.location.href = "../index.html";
     });
   });
 
