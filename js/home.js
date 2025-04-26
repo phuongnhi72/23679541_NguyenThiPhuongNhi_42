@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "BÚP BÊ NHỰA": {
       title: "Búp bê nhựa Mỹ ver1",
       price: "150.000đ",
-      img: "img/bupbe1.jpg",
+      img: "../img/bupbe1.jpg",
       ratingSold: "⭐ 4.3 | Đã bán: 2.1k"
     },
     "CAPOO": {
